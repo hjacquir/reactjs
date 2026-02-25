@@ -1,0 +1,10 @@
+services:
+  webserver:
+    build:
+      context: "docker/webserver"
+    container_name: "js-react"
+    restart: "always"
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/var/www/html
