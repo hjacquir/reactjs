@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react';
 
 const user = {
   name: "Foo",
@@ -22,9 +23,9 @@ const products = [
   }
 ]
 
-let isLogged = true
+let isLogged = false
 
-function LoginForm() {
+function LoginForm({count, onClick}) {
   return (
     <>
     <label>
@@ -35,7 +36,7 @@ function LoginForm() {
       Password :
       <input />
     </label>
-      <LoginButton />
+      <LoginButton count={count} onClick={onClick} />
     </>
 )
 }
@@ -79,6 +80,12 @@ function Profile() {
 }
 
 function App() {
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  const [count, setCount] = useState(0);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -98,7 +105,7 @@ function App() {
           isLogged ? (
             <AdminPanel />
           ) : (
-            <LoginForm />
+            <LoginForm count={count} onClick={handleClick} />
           )
         }
       </header>
@@ -106,9 +113,9 @@ function App() {
   );
 }
 
-function LoginButton() {
+function LoginButton({count, onClick}) {
   return (
-    <button>Enter</button>
+    <button onClick={onClick}>Cliquez {count} fois</button>
   );
 }
 
